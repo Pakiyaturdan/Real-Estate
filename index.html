@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="media.css" />
+    <link rel="stylesheet" href="iphonemedia.css" />
+    <script
+      src="https://kit.fontawesome.com/924fdfb4a5.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <title>Garant Estates</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="img/logo.png" alt="logo" />
+        <h1>Garant Estates</h1>
+      </div>
+
+      <nav>
+        <i class="bi menu bi-list"></i>
+        <div class="right_menu">
+          <div class="social">
+            <a
+              class="social__icon instagram"
+              href="https://www.instagram.com/garant.realestate/"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a class="social__icon whatsapp" href="https://wa.me/+905546541670">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a
+              class="social__icon youtube"
+              href="https://www.youtube.com/@garantrealestate663"
+            >
+              <i class="fab fa-youtube"></i>
+            </a>
+            <a class="social__icon whatsapp1" href="https://wa.me/905510065275">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+
+          <ul>
+            <li><a href="#">O Нас</a></li>
+            <li><a href="#">Проекты</a></li>
+            <li><a href="#">Услуги</a></li>
+            <li><a href="#">Бесплатный ТУР</a></li>
+          </ul>
+          <div class="user_cart">
+            <div class="user">
+              <a href="https://wa.me/+905546541670"
+                ><img src="img/customer.png" alt=""
+              /></a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <section>
+        <div class="content">
+          <h1 id="title">Garant Real Estate</h1>
+          <p>
+            Международная компания недвижимости В Турции.<br />
+            Предлагаем недвижимость на эксклюзивных условиях от застройщиков и
+            вторичное жилье.
+          </p>
+        </div>
+
+        <form id="feedback-form" action="" class="form">
+          <div class="columns">
+            <div class="column_form">
+              <div class="form_header">
+                <h3>Отправить заявку</h3>
+                <img src="" alt="" />
+              </div>
+              <div class="form_block">
+                <input type="text" name="name" placeholder="Ваше имя" />
+                <input
+                  type="text"
+                  name="second_name"
+                  placeholder="Ваша фамилия"
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Телефон"
+                  class="tel_mask"
+                />
+                <input type="text" name="email" placeholder="Ваш e-mail" />
+                <textarea
+                  name="coment"
+                  id=""
+                  cols="30"
+                  rows="5"
+                  placeholder="Как мы можем вам помочь?"
+                ></textarea>
+              </div>
+              <div class="form_footer">
+                <p id="message_form"></p>
+                <button type="submit">
+                  <p>Отправить</p>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <script src="https://ajax.google.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <script>
+          $(document).ready(function(){
+            $(".form").submit(function(){
+              var formID - $(this).attr('id');
+              var formNm - $('#' + formID);
+              $.ajax({
+                type: "POST",
+                url: 'sent.php',
+                data: formNm.serialize(),
+                beforeSend: function() {
+                  $("message_form").html('<p style="text-aling:center">Отправка...</p>');
+                },
+                success: function (data) {
+                  $("message_form").html('<p style="text-aling:center">Ваша заявка успешно отправлена!</p>');
+                },
+                error: function (jqXHR, text, error) {
+                  $("#message_form").html(error);
+                }
+              });
+              return false;
+            });
+          });
+        </script>
+
+        <script
+          type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"
+        ></script>
+        <script
+          type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/jquery-inputmask/5.0.5/jquery.inputmask.min.js"
+        ></script>
+        <script>
+          $(".tel_mask").inputmask("+7(999)999-9999");
+
+          jQuery.validator.addMethod(
+            "checkMaskPhone",
+            function (value, element) {
+              return /\+\d{1}\(\d{3}\)\d{3}-\d{4}/g.test(value);
+            }
+          );
+
+          var form = $(".quiz_form");
+
+          form.validate();
+
+          $.validator.addClassRules({
+            "phone-field": {
+              checkMaskPhone: true,
+            },
+          });
+        </script>
+      </section>
+    </header>
+
+    <section class="projects">
+      <div class="container1">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="projects__title-block">
+              <h2 class="projects__title">Выгодные варианты в Мерсине</h2>
+              <div class="profitable">
+                <img src="img/invest.png" alt class="profitable picture" />
+              </div>
+              <div class="profitable-options__button">
+                <a
+                  href="https://wa.me/+905546541670"
+                  class="btn-transparent white modal-trigger"
+                >
+                  <span class="hover-out">
+                    <span class="hover-out_i"
+                      >Получить все выгодные варианты</span
+                    >
+                  </span>
+                  <span class="hover_i">Получить все выгодные варианты</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="list">
+        <!--CONSEPT-->
+        <div
+          class="obj-min obj-min-spec pr-js-object-slider"
+          data-page=""
+          data-id="3687833"
+          data-show="%2FOnESPbMmFBsR2j26D8yjw8gF8GB7J8p0r8xzo6%2FlS3m8Bf7JlTpR%2Fb2I8OU%2Fx16e9VvTGcuI3ZsnDCikyfgXr%2BXudM37kECDaf7n9Ugj5lwnBE4mJV%2BP8wwyHRy5iweywRNgWW5dNXtF1CX9TtNMncKJFDYcBbTTb5fW0heDjedxqaxqLSSCcbOSlNvF3D4NpYLMREYQ1Z864jo4SR83j93HzI%2BvUnT5SbGmNWUncmDiMzJ9rwfcmdKCk2Cp4mVmBHS2nmynFonEr0j2i%2BjoJW%2BlKOaiXVQVtYc2Kg0wLDsCqIDlj%2BkQYJI9oug%2FVugW0SE6KM5qHCU81LMHTcaOaPKckrjwuqZwn6hitcahFs%3D"
+          data-pagetype="2"
+        >
+          <div class="b-slog">Квартира в рассрочку без процентов</div>
+          <div class="wrap">
+            <a
+              title="Квартира за 70 000 $ Район Тедже, Мерсин"
+              class="spec_item"
+              target="_blank"
+            ></a>
+            <div class="b-img">
+              <div
+                id="carouselExampleCaptions"
+                class="carousel slide"
+                data-bs-ride="carousel"
+              >
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img
+                      src="img/consept/08.jpg"
+                      class="d-block w-100"
+                      alt="..."
+                    />
+                    <div class="carousel-caption d-none d-md-block"></div>
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      src="img/consept/10.jpg"
+                      class="d-block w-100"
+                      alt="..."
+                    />
+                    <div class="carousel-caption d-none d-md-block"></div>
+                  </div>
+                  <div class="carousel-item">
+                    <img
+                      src="img/consept/022.jpg"
+                      class="d-block w-100"
+                      alt="..."
+                    />
+                    <div class="carousel-caption d-none d-md-block"></div>
+                  </div>
+
+                  <div class="carousel-item">
+                    <img
+                      src="img/consept/033.jpg"
+                      class="d-block w-100"
+                      alt="..."
+                    />
+                    <div class="carousel-caption d-none d-md-block"></div>
+                  </div>
+
+                  <div class="carousel-item">
+                    <img
+                      src="img/consept/2+1 (2).jpg"
+                      class="d-block w-100"
+                      alt="..."
+                    />
+                    <div class="carousel-caption d-none d-md-block"></div>
+                  </div>
+
+                  <div class="carousel-item">
+                    <img
+                      src="img/consept/2+1 (3).jpg"
+                      class="d-block w-100"
+                      alt="..."
+                    />
+                    <div class="carousel-caption d-none d-md-block"></div>
+                  </div>
+
+                  <div class="carousel-item">
+                    <img
+                      src="img/consept/2+1 (4).jpg"
+                      class="d-block w-100"
+                      alt="..."
+                    />
+                    <div class="carousel-caption d-none d-md-block"></div>
+                  </div>
+
+                  <div class="carousel-item">
+                    <img
+                      src="img/consept/2+1 (5).jpg"
+                      class="d-block w-100"
+                      alt="..."
+                    />
+                    <div class="carousel-caption d-none d-md-block"></div>
+                  </div>
+
+                  <div class="carousel-item">
+                    <img
+                      src="img/consept/2+1 (6).jpg"
+                      class="d-block w-100"
+                      alt="..."
+                    />
+                    <div class="carousel-caption d-none d-md-block"></div>
+                  </div>
+
+                  <div class="carousel-item">
+                    <img
+                      src="img/consept/2+1 (8).jpg"
+                      class="d-block w-100"
+                      alt="..."
+                    />
+                    <div class="carousel-caption d-none d-md-block"></div>
+                  </div>
+                </div>
+                <button
+                  class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExampleCaptions"
+                  data-bs-slide="prev"
+                >
+                  <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                  class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExampleCaptions"
+                  data-bs-slide="next"
+                >
+                  <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+            <div class="b-desc">
+              <div class="b-desc-head">
+                <div class="price">70 000 $</div>
+                <div class="b-title">Квартира в Районе Тедже, Мерсин</div>
+              </div>
+              <div class="product__info">
+                <span class="product__term">Квартиры: 1+1, 2+1.</span>
+                <span class="product__term">Расположение: Тедже</span>
+                <span class="product__term">Площадь: 66 м2, 100 м2.</span>
+                <span class="product__term">Артикул: Garant 0048</span>
+              </div>
+              <div class="txt">
+                <p>
+                  В 30.12.2022 года началось строительство нового проекта в
+                  районе с лучшими средиземноморскими пляжами. В районе Тедже
+                  идеальное сочетание цены и высокого качества реализуется в
+                  грамотных функциональных планировках квартир и инфраструктуры,
+                  которые созданы как для отдыха, так и для комфортного
+                  постоянного проживания всей семьей. Тут есть вся необходимая
+                  городская инфраструктура: кафе и рестораны, сетевые
+                  супермаркеты и фермерский рынок по средам и субботам,
+                  государственная больница и частные клиники, аптеки, детские
+                  сады, школы, банки и прочее. Жилой комплекс состоит из 225
+                  квартир и 3-х блоков планировок:<br />
+                  • 1+1 от 66 м2<br />
+                  • 2+1 от 100 м2<br />
+                  Завершение строительства запланировано на 30 декабря 2024
+                  года. Предоставляется возможность беспроцентной рассрочки.<br />
+                  <br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--AURA-->
+        <div
+          class="obj-min obj-min-spec pr-js-object-slider"
+          data-page=""
+          data-id="3687833"
+          data-show="%2FOnESPbMmFBsR2j26D8yjw8gF8GB7J8p0r8xzo6%2FlS3m8Bf7JlTpR%2Fb2I8OU%2Fx16e9VvTGcuI3ZsnDCikyfgXr%2BXudM37kECDaf7n9Ugj5lwnBE4mJV%2BP8wwyHRy5iweywRNgWW5dNXtF1CX9TtNMncKJFDYcBbTTb5fW0heDjedxqaxqLSSCcbOSlNvF3D4NpYLMREYQ1Z864jo4SR83j93HzI%2BvUnT5SbGmNWUncmDiMzJ9rwfcmdKCk2Cp4mVmBHS2nmynFonEr0j2i%2BjoJW%2BlKOaiXVQVtYc2Kg0wLDsCqIDlj%2BkQYJI9oug%2FVugW0SE6KM5qHCU81LMHTcaOaPKckrjwuqZwn6hitcahFs%3D"
+          data-pagetype="2"
+        >
+          <div class="b-slog">Квартира в рассрочку без процентов</div>
+          <div class="wrap">
+            <a
+              title="Квартира за 120 000 евро Район Лимонлу, Мерсин"
+              class="spec_item"
+              target="_blank"
+            ></a>
+            <div class="b-img">
+              <div
+                id="carouselExampleCaptions"
+                class="carousel slide"
+                data-bs-ride="carousel"
+              >
+                <div
+                  id="carouselExampleIndicators"
+                  class="carousel slide"
+                  data-bs-ride="carousel"
+                >
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img
+                        src="img/aura/EA_1 - Photo.jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/aura/EA_4 - Photo.jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/aura/EA_12 - Photo.jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/aura/1+1 resim_0000.jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/aura/1+1 resim_0005.jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/aura/2+1 resim_0004.jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/aura/2+1 resim_0007.jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/aura/2+1 resim_0009.jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/aura/2+1 resim_0012.jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/aura/2+1 resim_0014.jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                  </div>
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev"
+                  >
+                    <span
+                      class="carousel-control-prev-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Предыдущий</span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next"
+                  >
+                    <span
+                      class="carousel-control-next-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Следующий</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="b-desc">
+              <div class="b-desc-head">
+                <div class="price">120 000 €</div>
+                <div class="b-title">Квартира в Районе Лимонлу, Мерсин</div>
+              </div>
+              <div class="product__info">
+                <span class="product__term">Квартиры: 1+1, 2+1.</span>
+                <span class="product__term">Расположение: Лимонлу</span>
+                <span class="product__term">Площадь: 64 м2, 75 м2.</span>
+                <span class="product__term">Артикул: Garant 0047</span>
+              </div>
+              <div class="txt">
+                В районе Лимонлу полным ходом идет строительство нового проекта.
+                Как и в большинстве прибрежных городов, Лимонлу производит
+                свежие овощи и фрукты. Район специализируется на выращивании
+                цитрусовых, и фактически название района означает «лимон». В
+                4-этажной жилом комплексе планируется 55 квартир различного
+                типа, которые обеспечат комфорт и качество жизни владельцев
+                квартир на высшем уровне. Представлены квартиры следующих
+                планировок:<br />
+                • 1+1 от 64 м2<br />
+                • 2+1 от 75 м2<br />
+                Комплекс с полной инфраструктурой, отличается своей современной
+                архитектурой и качеством строительства, будет находиться на
+                первой береговой линии и в шаговой доступности все сетевые
+                магазины, рестораны, кафе, торговые дома. Строительство
+                завершится 30.09.2023 года.<br />
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--MARKA-->
+        <div
+          class="obj-min obj-min-spec pr-js-object-slider"
+          data-page=""
+          data-id="3687833"
+          data-show="%2FOnESPbMmFBsR2j26D8yjw8gF8GB7J8p0r8xzo6%2FlS3m8Bf7JlTpR%2Fb2I8OU%2Fx16e9VvTGcuI3ZsnDCikyfgXr%2BXudM37kECDaf7n9Ugj5lwnBE4mJV%2BP8wwyHRy5iweywRNgWW5dNXtF1CX9TtNMncKJFDYcBbTTb5fW0heDjedxqaxqLSSCcbOSlNvF3D4NpYLMREYQ1Z864jo4SR83j93HzI%2BvUnT5SbGmNWUncmDiMzJ9rwfcmdKCk2Cp4mVmBHS2nmynFonEr0j2i%2BjoJW%2BlKOaiXVQVtYc2Kg0wLDsCqIDlj%2BkQYJI9oug%2FVugW0SE6KM5qHCU81LMHTcaOaPKckrjwuqZwn6hitcahFs%3D"
+          data-pagetype="2"
+        >
+          <div class="b-slog">Квартира в рассрочку без процентов</div>
+          <div class="wrap">
+            <a
+              title="Квартира за 66 000 евро Район Арпачбахшиш, Мерсин"
+              class="spec_item"
+              target="_blank"
+            ></a>
+            <div class="b-img">
+              <div
+                id="carouselExampleCaptions"
+                class="carousel slide"
+                data-bs-ride="carousel"
+              >
+                <div
+                  id="carouselExampleDark"
+                  class="carousel carousel-dark slide"
+                  data-bs-ride="carousel"
+                >
+                  <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="10000">
+                      <img
+                        src="img/marka/cephe (5).jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item" data-bs-interval="2000">
+                      <img
+                        src="img/marka/cephe (10).jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/marka/zemin kat (9).jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                  </div>
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselExampleDark"
+                    data-bs-slide="prev"
+                  >
+                    <span
+                      class="carousel-control-prev-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Предыдущий</span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselExampleDark"
+                    data-bs-slide="next"
+                  >
+                    <span
+                      class="carousel-control-next-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Следующий</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="b-desc">
+              <div class="b-desc-head">
+                <div class="price">66 000 €</div>
+                <div class="b-title">Квартира в Районе Арпачбахшиш, Мерсин</div>
+              </div>
+              <div class="product__info">
+                <span class="product__term">Квартиры: 1+1, 2+1.</span>
+                <span class="product__term">Расположение: Арпачбахшиш</span>
+                <span class="product__term">Площадь: 74 м2, 99 м2.</span>
+                <span class="product__term">Артикул: Garant 0049</span>
+              </div>
+              <div class="txt">
+                В 500 метрах от песчаных пляжей Средиземного моря, расположен
+                новый грандиозный проект жилого комплекса от одного из ведущих
+                застройщиков. Главной особенностью комплекса является СПА –
+                центр, Хамам, Сауна, Фитнес-зал, и Кинотеатр. В этом комплексе
+                Вы будете ощущать себя как на отдыхе в отеле 5*. Комплекс
+                строится из высококачественных сертифицированных материалов.
+                Квартиры будут сдаваться с полной чистовой отделкой, встроенным
+                кухонным гарнитуром и сантехникой. Комплекс состоит из 1 блока,
+                12 этажей, 84 квартир.<br />
+                • 1+1 от 74 м2<br />
+                • 2+1 от 99 м2<br />
+                Окончание строительства - 30.03.2024<br />
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--RIVA-->
+        <div
+          class="obj-min obj-min-spec pr-js-object-slider"
+          data-page=""
+          data-id="3687833"
+          data-show="%2FOnESPbMmFBsR2j26D8yjw8gF8GB7J8p0r8xzo6%2FlS3m8Bf7JlTpR%2Fb2I8OU%2Fx16e9VvTGcuI3ZsnDCikyfgXr%2BXudM37kECDaf7n9Ugj5lwnBE4mJV%2BP8wwyHRy5iweywRNgWW5dNXtF1CX9TtNMncKJFDYcBbTTb5fW0heDjedxqaxqLSSCcbOSlNvF3D4NpYLMREYQ1Z864jo4SR83j93HzI%2BvUnT5SbGmNWUncmDiMzJ9rwfcmdKCk2Cp4mVmBHS2nmynFonEr0j2i%2BjoJW%2BlKOaiXVQVtYc2Kg0wLDsCqIDlj%2BkQYJI9oug%2FVugW0SE6KM5qHCU81LMHTcaOaPKckrjwuqZwn6hitcahFs%3D"
+          data-pagetype="2"
+        >
+          <div class="b-slog">Квартира в рассрочку без процентов</div>
+          <div class="wrap">
+            <a
+              title="Квартира за 57 000 евро Район Томюк, Мерсин"
+              class="spec_item"
+              target="_blank"
+            ></a>
+            <div class="b-img">
+              <div
+                id="carouselExampleIndicators"
+                class="carousel slide"
+                data-bs-ride="carousel"
+              >
+                <div
+                  id="carouselExampleControls"
+                  class="carousel slide"
+                  data-bs-ride="carousel"
+                >
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img
+                        src="img/riva/riva_cephe (1).jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/riva/riva_cephe (25).jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/riva/riva_cephe (26).jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/riva/riva zeminkat (2).jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/riva/riva zeminkat (9).jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/riva/riva zeminkat (10).jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/riva/riva zeminkat (11).jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/riva/Arka Plan.jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/riva/içmekan revize (6).jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/riva/riva iç mekan (8).jpg"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                    </div>
+                  </div>
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev"
+                  >
+                    <span
+                      class="carousel-control-prev-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Предыдущий</span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next"
+                  >
+                    <span
+                      class="carousel-control-next-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Следующий</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="b-desc">
+              <div class="b-desc-head">
+                <div class="price">57 000 €</div>
+                <div class="b-title">Квартира в Районе Томюк, Мерсин</div>
+              </div>
+              <div class="product__info">
+                <span class="product__term">Квартиры: 1+1.</span>
+                <span class="product__term">Расположение: Томюк</span>
+                <span class="product__term">Площадь: 60 м2, 63 м2.</span>
+                <span class="product__term">Артикул: Garant 0050</span>
+              </div>
+              <div class="txt">
+                Томюк – район, который привлекает соискателей недвижимости,
+                предпочитающих песчаные пляжи Средиземного моря. Именно здесь
+                всего в 500 м от моря в марте 2023 года начнется строительство
+                нового проекта от ведущего застройщика Мерсина. Приобретая
+                квартиру сейчас, у клиентов нашей компании есть возможность
+                воспользоваться беспроцентной рассрочкой платежа и сэкономить
+                при покупке, так как цены на начальном этапе строительства ниже,
+                чем при сдаче дома в эксплуатацию. Комплекс будет состоять из
+                одного 14ти этажного блока всего на 84 квартир. На нижнем
+                входном этаже будет расположена зона внутренней
+                инфраструктуры:Хамам, Сауна, Кинотеатр, Фитнес-зал. К ПРОДАЖЕ
+                ДОСТУПНЫ:<br />
+                • 1+1 от 60 м2 63 м2<br />
+                Окончание строительства запланировано на март 2024 года.
+                Свяжитесь с нашими менеджерами, чтобы получить подробную
+                информацию о бронировании и условиях рассрочки.<br />
+                <br />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="main">
+      <script src="main.js"></script>
+      <div class="container">
+        <div class="box">
+          <span></span>
+          <div class="content">
+            <div class="card-image">
+              <img src="img/zas1.ico" alt="zas1" />
+            </div>
+            <h2>Квартира от Застройщика</h2>
+            <p>Рассрочка на 12 месяцев БЕЗ КОМИССИИ!</p>
+            <a href="https://wa.me/+905546541670">ПОДРОБНЕЕ</a>
+          </div>
+        </div>
+
+        <div class="box">
+          <span></span>
+          <div class="content">
+            <div class="card-image">
+              <img src="img/invest.ico" alt="invest" />
+            </div>
+            <h2>Выгодная ИНВЕСТИЦИЯ без комиссии!</h2>
+            <p>В Лицензированный компании</p>
+            <a href="https://wa.me/+905546541670">ПОДРОБНЕЕ</a>
+          </div>
+        </div>
+
+        <div class="box">
+          <span></span>
+          <div class="content">
+            <div class="card-image">
+              <img src="img/gotovkv.ico" alt="gotovkv" />
+            </div>
+            <h2>Готовые квартиры!</h2>
+            <p>С видом на море</p>
+            <a href="https://wa.me/+905546541670">ПОДРОБНЕЕ</a>
+          </div>
+        </div>
+
+        <div class="box">
+          <span></span>
+          <div class="content">
+            <div class="card-image">
+              <img src="img/arenda.ico" alt="arenda" />
+            </div>
+            <h2>Квартиры в Аренду!</h2>
+            <p>Первая береговая линия</p>
+            <a href="https://wa.me/+905546541670">ПОДРОБНЕЕ</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="block">
+      <div class="block__left">
+        <h1 class="title">Юридическая поддержка</h1>
+        <div class="content">
+          <div class="label">Почему выбрали нас?</div>
+          <div class="desc">
+            Мы поддерживаем своих клиентов во всех аспектах, от продвижения
+            проектов до официальных сделок, от прав гражданства до
+            инвестиционных кoмпаний и многого другого.
+          </div>
+        </div>
+      </div>
+      <div class="block__right">
+        <div class="card1">
+          <div class="card__img">
+            <svg viewBox="0 0 640 512">
+              <path
+                d="M384 32H512c17.7 0 32 14.3 32 32s-14.3 32-32 32H398.4c-5.2 25.8-22.9 47.1-46.4 57.3V448H512c17.7 0 32 14.3 32 32s-14.3 32-32 32H320 128c-17.7 0-32-14.3-32-32s14.3-32 32-32H288V153.3c-23.5-10.3-41.2-31.6-46.4-57.3H128c-17.7 0-32-14.3-32-32s14.3-32 32-32H256c14.6-19.4 37.8-32 64-32s49.4 12.6 64 32zM125.8 177.3L51.1 320H204.9L130.2 177.3c-.4-.8-1.3-1.3-2.2-1.3s-1.7 .5-2.2 1.3zM128 128c18.8 0 36 10.4 44.7 27l77.8 148.5c3.1 5.8 6.1 14 5.5 23.8c-.7 12.1-4.8 35.2-24.8 55.1C210.9 402.6 178.2 416 128 416s-82.9-13.4-103.2-33.5c-20-20-24.2-43-24.8-55.1c-.6-9.8 2.5-18 5.5-23.8L83.3 155c8.7-16.6 25.9-27 44.7-27zm384 48c-.9 0-1.7 .5-2.2 1.3L435.1 320H588.9L514.2 177.3c-.4-.8-1.3-1.3-2.2-1.3zm-44.7-21c8.7-16.6 25.9-27 44.7-27s36 10.4 44.7 27l77.8 148.5c3.1 5.8 6.1 14 5.5 23.8c-.7 12.1-4.8 35.2-24.8 55.1C594.9 402.6 562.2 416 512 416s-82.9-13.4-103.2-33.5c-20-20-24.2-43-24.8-55.1c-.6-9.8 2.5-18 5.5-23.8L467.3 155z"
+              />
+            </svg>
+          </div>
+          <div class="card__title">Юридическая Экспертиза</div>
+          <div class="card__desc">
+            Юрист проверяет юридические документы на недвижимость, в том числе
+            разрешение на строительство проекта. Он также просматривает право
+            собственности на собственность при регистрации документа о праве
+            собственности и проверяет, нет ли на ней ипотеки или долга.
+          </div>
+        </div>
+        <div class="card1">
+          <div class="card__img">
+            <svg viewBox="0 0 384 512">
+              <path
+                d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM80 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H80c-8.8 0-16-7.2-16-16s7.2-16 16-16zm54.2 253.8c-6.1 20.3-24.8 34.2-46 34.2H80c-8.8 0-16-7.2-16-16s7.2-16 16-16h8.2c7.1 0 13.3-4.6 15.3-11.4l14.9-49.5c3.4-11.3 13.8-19.1 25.6-19.1s22.2 7.7 25.6 19.1l11.6 38.6c7.4-6.2 16.8-9.7 26.8-9.7c15.9 0 30.4 9 37.5 23.2l4.4 8.8H304c8.8 0 16 7.2 16 16s-7.2 16-16 16H240c-6.1 0-11.6-3.4-14.3-8.8l-8.8-17.7c-1.7-3.4-5.1-5.5-8.8-5.5s-7.2 2.1-8.8 5.5l-8.8 17.7c-2.9 5.9-9.2 9.4-15.7 8.8s-12.1-5.1-13.9-11.3L144 349l-9.8 32.8z"
+              />
+            </svg>
+          </div>
+          <div class="card__title">Подписание контракта</div>
+          <div class="card__desc">
+            Нотариус хранит оригинал контракта и передает покупателю и продавцу
+            нотариально заверенные копии.
+          </div>
+        </div>
+        <div class="card1">
+          <div class="card__img">
+            <svg viewBox="0 0 640 512">
+              <path
+                d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H322.8c-3.1-8.8-3.7-18.4-1.4-27.8l15-60.1c2.8-11.3 8.6-21.5 16.8-29.7l40.3-40.3c-32.1-31-75.7-50.1-123.9-50.1H178.3zm435.5-68.3c-15.6-15.6-40.9-15.6-56.6 0l-29.4 29.4 71 71 29.4-29.4c15.6-15.6 15.6-40.9 0-56.6l-14.4-14.4zM375.9 417c-4.1 4.1-7 9.2-8.4 14.9l-15 60.1c-1.4 5.5 .2 11.2 4.2 15.2s9.7 5.6 15.2 4.2l60.1-15c5.6-1.4 10.8-4.3 14.9-8.4L576.1 358.7l-71-71L375.9 417z"
+              />
+            </svg>
+          </div>
+          <div class="card__title">Нотариальные услуги</div>
+          <div class="card__desc">
+            Консультант по недвижимости в Турции помогает с нотариальными
+            услугами для утверждения переведенных документов и подписания
+            контракта
+          </div>
+        </div>
+        <div class="card1">
+          <div class="card__img">
+            <svg viewBox="0 0 640 512">
+              <path
+                d="M0 128C0 92.7 28.7 64 64 64H256h48 16H576c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H320 304 256 64c-35.3 0-64-28.7-64-64V128zm320 0V384H576V128H320zM178.3 175.9c-3.2-7.2-10.4-11.9-18.3-11.9s-15.1 4.7-18.3 11.9l-64 144c-4.5 10.1 .1 21.9 10.2 26.4s21.9-.1 26.4-10.2l8.9-20.1h73.6l8.9 20.1c4.5 10.1 16.3 14.6 26.4 10.2s14.6-16.3 10.2-26.4l-64-144zM160 233.2L179 276H141l19-42.8zM448 164c11 0 20 9 20 20v4h44 16c11 0 20 9 20 20s-9 20-20 20h-2l-1.6 4.5c-8.9 24.4-22.4 46.6-39.6 65.4c.9 .6 1.8 1.1 2.7 1.6l18.9 11.3c9.5 5.7 12.5 18 6.9 27.4s-18 12.5-27.4 6.9l-18.9-11.3c-4.5-2.7-8.8-5.5-13.1-8.5c-10.6 7.5-21.9 14-34 19.4l-3.6 1.6c-10.1 4.5-21.9-.1-26.4-10.2s.1-21.9 10.2-26.4l3.6-1.6c6.4-2.9 12.6-6.1 18.5-9.8l-12.2-12.2c-7.8-7.8-7.8-20.5 0-28.3s20.5-7.8 28.3 0l14.6 14.6 .5 .5c12.4-13.1 22.5-28.3 29.8-45H448 376c-11 0-20-9-20-20s9-20 20-20h52v-4c0-11 9-20 20-20z"
+              />
+            </svg>
+          </div>
+          <div class="card__title">Предоставление переводчиков</div>
+          <div class="card__desc">
+            Мы предоставляем присяжных переводчиков, говорящих на английском и
+            других языках, для перевода документов или подписания контрактов.
+          </div>
+        </div>
+        <div class="card1">
+          <div class="card__img">
+            <svg viewBox="0 0 384 512">
+              <path
+                d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM112 256H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16z"
+              />
+            </svg>
+          </div>
+          <div class="card__title">Доверенность</div>
+          <div class="card__desc">
+            Это юридический документ, посредством которого клиент дает право
+            адвокату по Вашему выбору совершать определенные сделки от Вашего
+            имени.
+          </div>
+        </div>
+        <div class="card1">
+          <div class="card__img">
+            <svg viewBox="0 0 576 512">
+              <path
+                d="M0 96l576 0c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96zm0 32V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128H0zM64 405.3c0-29.5 23.9-53.3 53.3-53.3H234.7c29.5 0 53.3 23.9 53.3 53.3c0 5.9-4.8 10.7-10.7 10.7H74.7c-5.9 0-10.7-4.8-10.7-10.7zM176 320c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64zM352 208c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16z"
+              />
+            </svg>
+          </div>
+          <div class="card__title">
+            Получение документа на право собственности
+          </div>
+          <div class="card__desc">
+            Это официальный документ с печатью официального органа,
+            подтверждающий право собственности на недвижимое имущество.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="services">
+      <div class="cart">
+        <div class="cart__img">
+          <svg viewBox="0 0 640 512">
+            <path
+              d="M.3 166.9L0 68C0 57.7 9.5 50.1 19.5 52.3l35.6 7.9c10.6 2.3 19.2 9.9 23 20L96 128l127.3 37.6L181.8 20.4C178.9 10.2 186.6 0 197.2 0h40.1c11.6 0 22.2 6.2 27.9 16.3l109 193.8 107.2 31.7c15.9 4.7 30.8 12.5 43.7 22.8l34.4 27.6c24 19.2 18.1 57.3-10.7 68.2c-41.2 15.6-86.2 18.1-128.8 7L121.7 289.8c-11.1-2.9-21.2-8.7-29.3-16.9L9.5 189.4c-5.9-6-9.3-14-9.3-22.5zM32 448H608c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32zm160-80c0 17.7-14.3 32-32 32s-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32zm64 48c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z"
+            />
+          </svg>
+        </div>
+        <div class="cart__img2">
+          <svg viewBox="0 0 512 512">
+            <path
+              d="M416 256s96-96 96-160c0-53-43-96-96-96s-96 43-96 96c0 29.4 20.2 65.5 42.1 96H320c-53 0-96 43-96 96s43 96 96 96h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H188.6c-6.2 9.6-12.6 18.8-19 27.2c-10.7 14.2-21.3 26.9-30 36.8H416c53 0 96-43 96-96s-43-96-96-96H320c-17.7 0-32-14.3-32-32s14.3-32 32-32h96zm0-128c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32zM149.9 448c21.9-30.5 42.1-66.6 42.1-96c0-53-43-96-96-96s-96 43-96 96c0 64 96 160 96 160s3.5-3.5 9.2-9.6c.4-.4 .7-.8 1.1-1.2c3.3-3.5 7.1-7.8 11.4-12.8c.2-.2 .4-.4 .6-.6c9.4-10.8 20.7-24.6 31.6-39.8zM96 384c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z"
+            />
+          </svg>
+        </div>
+        <div class="cart__img3">
+          <svg viewBox="0 0 640 512">
+            <path
+              d="M192 0H48C21.5 0 0 21.5 0 48V368c0 26.5 21.5 48 48 48H162.7c6.6-18.6 24.4-32 45.3-32V272c0-44.2 35.8-80 80-80h32V128H224c-17.7 0-32-14.3-32-32V0zm96 224c-26.5 0-48 21.5-48 48v16 96 32H208c-8.8 0-16 7.2-16 16v16c0 35.3 28.7 64 64 64H576c35.3 0 64-28.7 64-64V432c0-8.8-7.2-16-16-16H592V288c0-35.3-28.7-64-64-64H320 304 288zm32 64H528V416H304V288h16zM224 0V96h96L224 0z"
+            />
+          </svg>
+        </div>
+        <div class="cart__img4">
+          <svg viewBox="0 0 576 512">
+            <path
+              d="M0 96l576 0c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96zm0 32V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128H0zM64 405.3c0-29.5 23.9-53.3 53.3-53.3H234.7c29.5 0 53.3 23.9 53.3 53.3c0 5.9-4.8 10.7-10.7 10.7H74.7c-5.9 0-10.7-4.8-10.7-10.7zM176 320c-35.3 0-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64s-28.7 64-64 64zM352 208c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16z"
+            />
+          </svg>
+        </div>
+        <div class="cart__img5">
+          <svg viewBox="0 0 512 512">
+            <path
+              d="M0 32C0 14.3 14.3 0 32 0H160c17.7 0 32 14.3 32 32V416c0 53-43 96-96 96s-96-43-96-96V32zM223.6 425.9c.3-3.3 .4-6.6 .4-9.9V154l75.4-75.4c12.5-12.5 32.8-12.5 45.3 0l90.5 90.5c12.5 12.5 12.5 32.8 0 45.3L223.6 425.9zM182.8 512l192-192H480c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32H182.8zM128 64H64v64h64V64zM64 192v64h64V192H64zM96 440c13.3 0 24-10.7 24-24s-10.7-24-24-24s-24 10.7-24 24s10.7 24 24 24z"
+            />
+          </svg>
+        </div>
+        <div class="cart__img6">
+          <svg viewBox="0 0 640 512">
+            <path
+              d="M208 352c114.9 0 208-78.8 208-176S322.9 0 208 0S0 78.8 0 176c0 38.6 14.7 74.3 39.6 103.4c-3.5 9.4-8.7 17.7-14.2 24.7c-4.8 6.2-9.7 11-13.3 14.3c-1.8 1.6-3.3 2.9-4.3 3.7c-.5 .4-.9 .7-1.1 .8l-.2 .2 0 0 0 0C1 327.2-1.4 334.4 .8 340.9S9.1 352 16 352c21.8 0 43.8-5.6 62.1-12.5c9.2-3.5 17.8-7.4 25.3-11.4C134.1 343.3 169.8 352 208 352zM448 176c0 112.3-99.1 196.9-216.5 207C255.8 457.4 336.4 512 432 512c38.2 0 73.9-8.7 104.7-23.9c7.5 4 16 7.9 25.2 11.4c18.3 6.9 40.3 12.5 62.1 12.5c6.9 0 13.1-4.5 15.2-11.1c2.1-6.6-.2-13.8-5.8-17.9l0 0 0 0-.2-.2c-.2-.2-.6-.4-1.1-.8c-1-.8-2.5-2-4.3-3.7c-3.6-3.3-8.5-8.1-13.3-14.3c-5.5-7-10.7-15.4-14.2-24.7c24.9-29 39.6-64.7 39.6-103.4c0-92.8-84.9-168.9-192.6-175.5c.4 5.1 .6 10.3 .6 15.5z"
+            />
+          </svg>
+        </div>
+        <div class="cart__img7">
+          <svg viewBox="0 0 576 512">
+            <path
+              d="M7.8 207.7c-13.1-17.8-9.3-42.8 8.5-55.9L142.9 58.5C166.2 41.3 194.5 32 223.5 32H384 544c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H507.2l-44.9 36c-22.7 18.2-50.9 28-80 28H304 288 224c-17.7 0-32-14.3-32-32s14.3-32 32-32h64 16c8.8 0 16-7.2 16-16s-7.2-16-16-16H183.4L63.7 216.2c-17.8 13.1-42.8 9.3-55.9-8.5zM382.4 160l0 0 .9 0c-.3 0-.6 0-.9 0zM568.2 304.3c13.1 17.8 9.3 42.8-8.5 55.9L433.1 453.5c-23.4 17.2-51.6 26.5-80.7 26.5H192 32c-17.7 0-32-14.3-32-32V384c0-17.7 14.3-32 32-32H68.8l44.9-36c22.7-18.2 50.9-28 80-28H272h16 64c17.7 0 32 14.3 32 32s-14.3 32-32 32H288 272c-8.8 0-16 7.2-16 16s7.2 16 16 16H392.6l119.7-88.2c17.8-13.1 42.8-9.3 55.9 8.5zM193.6 352l0 0-.9 0c.3 0 .6 0 .9 0z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div>
+        <div class="margin2">
+          <div class="tur">
+            <span>Бесплатный Тур</span>
+          </div>
+          <div class="margin3">
+            <div class="text">
+              Встречу в аэропорту, трансфер и размещение в комфортабельных
+              апартаментах, а также наше гостеприимство и всестороннюю поддержку
+            </div>
+          </div>
+          <div class="margin4">
+            <div class="text">
+              Обзорную, увлекательную экскурсию по городу и полностью бесплатный
+              ознакомительный тур для показа объектов, подобранных под Ваши
+              запросы
+            </div>
+          </div>
+          <div class="margin5">
+            <div class="text">
+              Услуги оформления сделки купли-продажи жилья «под ключ» и
+              подписание трехстороннего договора на русском языке в присутствии
+              присяжного переводчика
+            </div>
+          </div>
+          <div class="margin6">
+            <div class="text">
+              Помощь в оформлении вида на жительство в Турции и медицинской
+              страховки с сервисом высокого качества для Вашего здоровья и
+              долголетия
+            </div>
+          </div>
+          <div class="margin7">
+            <div class="text">
+              Помощь в оформлении интерьера: сопровождение в мебельных салонах,
+              магазинах электроники, бытовой техники, где предоставляются бонусы
+              и подарки клиентам Компании Garant Real Estate
+            </div>
+          </div>
+          <div class="margin8">
+            <div class="text">
+              Профессиональные, исчерпывающие, индивидуальные консультации при
+              выборе той самой, на 100 % Вашей недвижимости с учетом всех
+              пожеланий
+            </div>
+          </div>
+          <div class="margin9">
+            <div class="text">
+              ЛЮБАЯ ПОМОЩЬ по всем бытовым вопросам и обустройству собственности
+              во время адаптации к жизни в нашей прекрасной гостеприимной
+              неповторимой стране<br />
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div></div>
+    </div>
+
+    <!--Footer-->
+
+    <section id="footer">
+      <div class="title-text">
+        <h4>Международная компания недвижимости В Мерсине</h4>
+        <h1>Garant Real Estate</h1>
+      </div>
+
+      <div class="footer">
+        <div class="footer-left">
+          <h2>Контакты</h2>
+          <p><i class="fas fa-location-arrow"></i> Чешмели, Мерсин, Турция</p>
+          <p>
+            <i class="fas fa-envelope-open-text"></i>
+            garantgayrimenkul@gmail.com
+          </p>
+          <p><i class="fas fa-phone-square-alt"></i> +90 (554) 654 16 70</p>
+        </div>
+        <div class="footer-right">
+          <h2>Время работы</h2>
+          <p>
+            <i class="fas fa-clock"></i> Понидельник - Суббота: 09:00 - 18:00
+          </p>
+          <p><i class="fas fa-clock"></i> Воскресенье: выходной</p>
+        </div>
+      </div>
+
+      <div class="social-links1">
+        <a href="https://www.instagram.com/garant.realestate/">
+          <i class="fab fa-instagram-square"></i>
+        </a>
+        <a href="https://www.youtube.com/@garantrealestate663">
+          <i class="fab fa-youtube-square"></i>
+        </a>
+        <a href="https://wa.me/+905546541670">
+          <i class="fab fa-whatsapp-square"></i>
+        </a>
+      </div>
+    </section>
+
+    <script src="app.js"></script>
+  </body>
+</html>
